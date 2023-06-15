@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_ex/page/camera-page.dart';
 import 'package:fit_ex/page/categories-page.dart';
 import 'package:fit_ex/page/levels-page.dart';
 import 'package:fit_ex/page/profile-page.dart';
@@ -10,7 +11,7 @@ import 'auth.dart';
 import 'model/User.dart';
 
 class BottomNavBar extends StatefulWidget {
-  const BottomNavBar({super.key});
+  const BottomNavBar({Key? key});
 
   @override
   State<BottomNavBar> createState() => BottomNavBarState();
@@ -25,6 +26,7 @@ class BottomNavBarState extends State<BottomNavBar> {
     WidgetTree(),
     CategoriesScreen(),
     ProfilePage(),
+    CameraScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,6 +42,9 @@ class BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: BottomNavigationBar(
         onTap: _onItemTapped,
         currentIndex: _selectedIndex,
+        unselectedItemColor: Colors.black,
+        selectedItemColor: Colors.blue, // Set the selected item color
+        selectedIconTheme: IconThemeData(color: Colors.blue), // Set the icon color for the selected item
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -52,6 +57,10 @@ class BottomNavBarState extends State<BottomNavBar> {
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
             label: 'Me',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.camera_alt),
+            label: 'Camera',
           ),
         ],
       ),
