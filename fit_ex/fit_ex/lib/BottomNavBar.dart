@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fit_ex/page/MyHomePage.dart';
 import 'package:fit_ex/page/camera-page.dart';
 import 'package:fit_ex/page/categories-page.dart';
+import 'package:fit_ex/page/exercise-details.dart';
+import 'package:fit_ex/page/filtered-exercises.dart';
 import 'package:fit_ex/page/levels-page.dart';
 import 'package:fit_ex/page/profile-page.dart';
 import 'package:fit_ex/widget-tree.dart';

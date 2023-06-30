@@ -8,48 +8,75 @@ class ExerciseDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final headlineStyle = Theme.of(context).textTheme.headline5;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('FitEx'),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
+      body: SafeArea(
+        child: Container(
+          color: Color.fromRGBO(95, 95, 95, 1), // Set the background color to a dark shade of grey
+          padding: EdgeInsets.symmetric(horizontal: 24.0, vertical: 32.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
+              SizedBox(height: 20),
               Text(
                 '${exercise.name}',
-                style: TextStyle(fontSize: 30.0, backgroundColor: Color.alphaBlend(Colors.black, Colors.black)),
+                style: TextStyle(
+                  fontSize: 32.0,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(
-                height: 30, // <-- SEE HERE
+              SizedBox(height: 24),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.asset(
+                  exercise.image,
+                  height: 200.0,
+                  fit: BoxFit.cover,
+                ),
               ),
-              Image.asset(
-                exercise.image,
-                height: 200.0,
-                fit: BoxFit.fill,
-              ),
-
-              Padding(padding: EdgeInsets.all(16.0), child:
+              SizedBox(height: 24),
               Text(
-                'Instructions: ',
-                style: Theme.of(context).textTheme.headline5,
-              ),),
+                'Instructions',
+                style: headlineStyle?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ) ??
+                    TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+              ),
+              SizedBox(height: 12),
               Text(
                 '${exercise.description}',
-                style: Theme.of(context).textTheme.headline6,
-
+                style: TextStyle(
+                  fontSize: 18.0,
+                  color: Colors.white,
+                ),
               ),
-              SizedBox(
-                height: 30, // <-- SEE HERE
-              ),
-              Padding(padding: EdgeInsets.all(16.0), child:
+              SizedBox(height: 24),
               Text(
-                'Focus area: ${exercise.category}',
-                style: Theme.of(context).textTheme.headline5,
-              ),),
+                'Focus Area: ${exercise.category}',
+                style: headlineStyle?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ) ??
+                    TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+              ),
+              Expanded(
+                child: SizedBox(),
+              ),
             ],
           ),
         ),

@@ -1,73 +1,9 @@
-// import 'package:flutter/material.dart';
-// import 'package:fit_ex/model/User.dart';
-// import 'package:fit_ex/controller/profile-controller.dart';
-//
-// class ProfilePage extends StatefulWidget {
-//   const ProfilePage({super.key});
-//
-//   @override
-//   _ProfilePageState createState() => _ProfilePageState();
-// }
-//
-// class _ProfilePageState extends State<ProfilePage> {
-//   final ProfileController _profileController = ProfileController();
-//
-//   Users? _currentUserData;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     _getCurrentUserData();
-//   }
-//
-//   _getCurrentUserData() async {
-//     final data = await _profileController.getCurrentUser();
-//     setState(() {
-//       _currentUserData = data;
-//     });
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: Text('Profile'),
-//       ),
-//       body: Center(
-//         child: _currentUserData == null
-//             ? CircularProgressIndicator()
-//             : Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: [
-//             Text(
-//               'Username: ${_currentUserData!.username}',
-//               style: TextStyle(fontSize: 24),
-//             ),
-//             SizedBox(height: 16),
-//             Text(
-//               'Weight: ${_currentUserData!.weight} kg',
-//               style: TextStyle(fontSize: 20),
-//             ),
-//             SizedBox(height: 16),
-//             Text(
-//               'Height: ${_currentUserData!.height} cm',
-//               style: TextStyle(fontSize: 20),
-//             ),
-//             SizedBox(height: 16),
-//             Text(
-//               'Weight goal: ${_currentUserData!.weightGoal} kg',
-//               style: TextStyle(fontSize: 20),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }
-
 import 'package:flutter/material.dart';
 import 'package:fit_ex/model/User.dart';
 import 'package:fit_ex/controller/profile-controller.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
+import 'package:latlong2/latlong.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key});
@@ -80,11 +16,13 @@ class _ProfilePageState extends State<ProfilePage> {
   final ProfileController _profileController = ProfileController();
 
   Users? _currentUserData;
+  double _distanceCovered = 0.0;
 
   @override
   void initState() {
     super.initState();
     _getCurrentUserData();
+    _calculateDistanceCovered();
   }
 
   _getCurrentUserData() async {
@@ -161,6 +99,28 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  Future<void> _calculateDistanceCovered() async {
+    final currentPosition = await Geolocator.getCurrentPosition();
+    final previousPosition = await _getLastKnownPosition();
+
+    if (previousPosition != null) {
+      final distance = Distance().as(
+        LengthUnit.Kilometer,
+        LatLng(previousPosition.latitude, previousPosition.longitude),
+        LatLng(currentPosition.latitude, currentPosition.longitude),
+      );
+      setState(() {
+        _distanceCovered = distance;
+      });
+    }
+  }
+
+  Future<Position?> _getLastKnownPosition() async {
+    final position = await Geolocator.getLastKnownPosition();
+
+    return position;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -168,39 +128,56 @@ class _ProfilePageState extends State<ProfilePage> {
         title: Text('Profile'),
       ),
       body: Center(
-        child: _currentUserData == null
-            ? CircularProgressIndicator()
-            : Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              'Username: ${_currentUserData!.username}',
-              style: TextStyle(fontSize: 24),
+        child: Card(
+          color: Colors.grey,
+          child: Container(
+            padding: EdgeInsets.all(16.0),
+            child: ListView(
+              shrinkWrap: true,
+              children: <Widget>[
+                Text(
+                  'Username: ${_currentUserData!.username}',
+                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 16),
+                Text(
+                  'Height: ${_currentUserData!.height} cm',
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(height: 16),
+                InkWell(
+                  onTap: () => _updateWeight(context),
+                  child: Text(
+                    'Weight: ${_currentUserData!.weight} kg',
+                    style: TextStyle(
+                      fontSize: 20,
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                InkWell(
+                  onTap: () => _updateWeightGoal(context),
+                  child: Text(
+                    'Weight goal: ${_currentUserData!.weightGoal} kg',
+                    style: TextStyle(
+                      fontSize: 20,
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 40),
+                Text(
+                  'Distance Covered: $_distanceCovered km',
+                  style: TextStyle(fontSize: 20),
+                ),
+              ],
             ),
-            SizedBox(height: 16),
-            Text(
-              'Height: ${_currentUserData!.height} cm',
-              style: TextStyle(fontSize: 20),
-            ),
-            SizedBox(height: 16),
-            InkWell(
-              onTap: () => _updateWeight(context),
-              child: Text(
-                'Weight: ${_currentUserData!.weight} kg',
-                style: TextStyle(
-                    fontSize: 20, decoration: TextDecoration.underline),
-              ),
-            ),
-            SizedBox(height: 16),
-            InkWell(
-              onTap: () => _updateWeightGoal(context),
-              child: Text(
-                'Weight goal: ${_currentUserData!.weightGoal} kg',
-                style: TextStyle(
-                    fontSize: 20, decoration: TextDecoration.underline),
-              ),
-            ),
-          ],
+          ),
         ),
       ),
     );

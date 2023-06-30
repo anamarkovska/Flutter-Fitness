@@ -35,7 +35,7 @@ class UserRepository {
 
   Future<Users> currentUser(String username) async {
     final snapshot = await _db.collection('users').where('username', isEqualTo: username).get();
-    final userData = snapshot.docs.map((e) => Users.fromSnapshot(e)).single;
+    final userData = snapshot.docs.map((e) => Users.fromSnapshot(e)).first;
     return userData;
   }
 

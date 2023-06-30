@@ -65,6 +65,18 @@
       <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/image_picker_windows/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/image_picker_windows/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/image_picker_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/geolocator_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/fit_ex/fit_ex/windows/flutter/ephemeral/.plugin_symlinks/permission_handler_windows/example/build" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 33, extension level 3 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
