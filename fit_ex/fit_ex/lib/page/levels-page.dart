@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import '../BottomNavBar.dart';
 import '../controller/exercises-controller.dart';
 import '../model/Exercise.dart';
 import 'filtered-exercises.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({Key? key}) : super(key: key);
 
   @override
   _CategoriesScreenState createState() => _CategoriesScreenState();
@@ -25,16 +26,17 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Categories"),
+        title: const Text("Categories"),
       ),
       body: Container(
+        padding: const EdgeInsets.all(16.0),
         child: FutureBuilder<List<Exercise>>(
           future: _exercises,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              List<Exercise>? exercises = snapshot.data;
+              final List<Exercise>? exercises = snapshot.data;
               exercises?.forEach((exercise) {
-                String level = exercise.level;
+                final String level = exercise.level;
                 if (!_categoriesByLevel.containsKey(level)) {
                   _categoriesByLevel[level] = [];
                 }
@@ -43,30 +45,46 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
               return ListView.builder(
                 itemCount: _categoriesByLevel.keys.length,
                 itemBuilder: (context, index) {
-                  String level = _categoriesByLevel.keys.elementAt(index);
-                  List<String>? categories = _categoriesByLevel[level]?.toSet().toList();
-                  return ExpansionTile(
-                    title: Text(level),
-                    children: categories!.map((category) {
-                      return ListTile(
-                        title: Text(category),
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ExercisesByCategoryScreen(level, category),
+                  final String level = _categoriesByLevel.keys.elementAt(index);
+                  final List<String>? categories = _categoriesByLevel[level]?.toSet().toList();
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    child: ExpansionTile(
+                      title: Text(
+                        level,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      children: categories!.map((category) {
+                        return ListTile(
+                          title: Text(
+                            category,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
                             ),
-                          );
-                        },
-                      );
-                    }).toList(),
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ExercisesByCategoryScreen(level, category),
+                              ),
+                            );
+                          },
+                        );
+                      }).toList(),
+                    ),
                   );
                 },
               );
             } else if (snapshot.hasError) {
               return Text("${snapshot.error}");
             }
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           },
         ),
       ),

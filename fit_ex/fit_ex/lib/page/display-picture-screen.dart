@@ -13,24 +13,45 @@ class DisplayPictureScreen extends StatelessWidget {
     final formattedDate = DateFormat('dd.MM.yyyy HH:mm').format(now);
 
     return Scaffold(
-      appBar: AppBar(title: Text('Display Picture')),
-      body: Center(
-        child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
+      appBar: AppBar(
+        title: Text('Display Picture'),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 80),
-          Image.file(
-            File(imagePath),
-            fit: BoxFit.fill,
+          Expanded(
+            child: Container(
+              margin: EdgeInsets.all(16.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.2),
+                    blurRadius: 6.0,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10.0),
+                child: Image.file(
+                  File(imagePath),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
-          SizedBox(height: 16),
+          SizedBox(height: 16.0),
           Text(
             'Date Taken: $formattedDate',
-            style: TextStyle(fontSize: 20),
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          SizedBox(height: 16.0),
         ],
       ),
-      )
     );
   }
 }

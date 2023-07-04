@@ -31,44 +31,84 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Card(
-              color: Colors.grey,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  Container(
-                    child: Card(
-                      semanticContainer: true,
-                      clipBehavior: Clip.antiAliasWithSaveLayer,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      elevation: 5,
-                      margin: EdgeInsets.all(10),
-                      child: Image.asset(
-                        'assets/images/image.jpg',
-                        height: 200.0,
-                        fit: BoxFit.fill,
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Card(
+                color: Colors.grey[200],
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        semanticContainer: true,
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        elevation: 5,
+                        child: Image.asset(
+                          'assets/images/strong-woman.webp',
+                          height: 200.0,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
-                  ),
-                  ListTile(
-                    leading: Image.asset('assets/images/image.jpg'),
-                    title: const Text('Health Benefits, How to Get Started, and How to Get Better'),
-                  ),
-                  ListTile(
-                    leading: Image.asset('assets/images/image.jpg'),
-                    title: const Text('What Is the DASH Diet?'),
-                  ),
-                  ListTile(
-                    leading: Image.asset('assets/images/image.jpg'),
-                    title: const Text('5 Yoga Poses and Exercises for Better Sleep'),
-                  ),
-                  ListTile(
-                    leading: Image.asset('assets/images/image.jpg'),
-                    title: const Text('How What You Eat Affects How You Sleep'),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Image.asset('assets/images/download.jpg'),
+                        title: Text(
+                          'Health Benefits, How to Get Started, and How to Get Better',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Image.asset('assets/images/one-more.webp'),
+                        title: Text(
+                          'What Is the DASH Diet?',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Image.asset('assets/images/joga.jpg'),
+                        title: Text(
+                          '5 Yoga Poses and Exercises for Better Sleep',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: ListTile(
+                        leading: Image.asset('assets/images/man.jpeg'),
+                        title: Text(
+                          'How What You Eat Affects How You Sleep',
+                          style: TextStyle(
+                            fontSize: 18.0,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:fit_ex/model/User.dart';
 import 'package:fit_ex/controller/profile-controller.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:get/get.dart';
 import 'package:latlong2/latlong.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -126,54 +125,92 @@ class _ProfilePageState extends State<ProfilePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Profile'),
+        backgroundColor: Colors.grey,
       ),
       body: Center(
         child: Card(
-          color: Colors.grey,
-          child: Container(
+          color: Colors.grey[200],
+          margin: EdgeInsets.all(16.0),
+          child: Padding(
             padding: EdgeInsets.all(16.0),
             child: ListView(
               shrinkWrap: true,
               children: <Widget>[
+                CircleAvatar(
+                  radius: 60,
+                  backgroundColor: Colors.grey[300],
+                  child: Icon(
+                    Icons.account_circle,
+                    size: 100,
+                    color: Colors.grey[600],
+                  ),
+                ),
+                SizedBox(height: 16),
                 Text(
                   'Username: ${_currentUserData!.username}',
                   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 SizedBox(height: 16),
-                Text(
-                  'Height: ${_currentUserData!.height} cm',
-                  style: TextStyle(fontSize: 20),
+                ListTile(
+                  leading: Icon(Icons.height),
+                  title: Text(
+                    'Height',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  subtitle: Text(
+                    '${_currentUserData!.height} cm',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
-                SizedBox(height: 16),
-                InkWell(
-                  onTap: () => _updateWeight(context),
-                  child: Text(
-                    'Weight: ${_currentUserData!.weight} kg',
-                    style: TextStyle(
-                      fontSize: 20,
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                ListTile(
+                  leading: Icon(Icons.fitness_center),
+                  title: Text(
+                    'Weight',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  subtitle: InkWell(
+                    onTap: () => _updateWeight(context),
+                    child: Text(
+                      '${_currentUserData!.weight} kg',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
-                InkWell(
-                  onTap: () => _updateWeightGoal(context),
-                  child: Text(
-                    'Weight goal: ${_currentUserData!.weightGoal} kg',
-                    style: TextStyle(
-                      fontSize: 20,
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
+                ListTile(
+                  leading: Icon(Icons.flag),
+                  title: Text(
+                    'Weight Goal',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  subtitle: InkWell(
+                    onTap: () => _updateWeightGoal(context),
+                    child: Text(
+                      '${_currentUserData!.weightGoal} kg',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline,
+                      ),
                     ),
                   ),
                 ),
                 SizedBox(height: 40),
-                Text(
-                  'Distance Covered: $_distanceCovered km',
-                  style: TextStyle(fontSize: 20),
+                ListTile(
+                  leading: Icon(Icons.directions_walk),
+                  title: Text(
+                    'Distance Covered',
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  subtitle: Text(
+                    '${_distanceCovered.toStringAsFixed(2)} km',
+                    style: TextStyle(fontSize: 18),
+                  ),
                 ),
               ],
             ),
